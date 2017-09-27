@@ -11,13 +11,19 @@
         "Other" 
     ], 
     "activationEvents": [ 
-        "onCommand:withoutGuns.gunsOff" 
+        "onCommand:withoutGuns.gunsOff",
+        "onCommand:withoutGuns.gunsOn"
     ], 
     "main": "./out/src/extension", 
     "contributes": { 
-        "commands": [{ 
+        "commands": [
+        { 
             "command": "withoutGuns.gunsOff", 
             "title": "Guns Off" 
+        },
+        { 
+            "command": "withoutGuns.gunsOn", 
+            "title": "Guns On" 
         }] 
     }, 
     "scripts": { 
