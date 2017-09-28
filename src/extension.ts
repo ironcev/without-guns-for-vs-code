@@ -6,12 +6,12 @@ export function activate(context: vscode.ExtensionContext) {
     const intelliSenseSettings = new IntelliSenseSettings(vscode.workspace.getConfiguration())
 
     let gunsOff = vscode.commands.registerCommand('withoutGuns.gunsOff', () => {
-       vscode.window.showInformationMessage('Your guns are turned off ;-)');
+       vscode.window.showInformationMessage('We just took your guns. That\'s for your own good.');
        intelliSenseSettings.removeIntelliSense();
     });
 
     let gunsOn = vscode.commands.registerCommand('withoutGuns.gunsOn', () => {
-        vscode.window.showInformationMessage('Your guns are turned on.');
+        vscode.window.showInformationMessage('You got your guns back. Be careful what you do with them.');
         intelliSenseSettings.applyInitialSettings();
     });
 
