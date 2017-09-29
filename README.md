@@ -1,4 +1,6 @@
-# without README
+# Without Guns for Visual Studio Code
+
+[The Readme.MD is yet to come. The below text is the standard template created by the Yeoman extension generator.]
 
 This is the README for your extension "without-guns". After writing up a brief description, we recommend including the following sections.
 
