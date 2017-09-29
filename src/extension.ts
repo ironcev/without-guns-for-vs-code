@@ -21,7 +21,18 @@ export function activate(context: vscode.ExtensionContext) {
    context.subscriptions.push(gunsOn);
 }
 
+/**
+ *  Controlls a single gun.
+ * 
+ *  If a gun controller needs to manipulate VS Code settings in order to achieve the control
+ *  it should do the following:
+ *  - Store the current VS Code settings each time when taking the gun.
+ *  - The settings are stored in a private field called "initialSettings".
+ *  - Restore the settings when giving the gun back.
+ */
 interface GunController {
+    /** True if the gun is currently taken. We assume that the gun is initially never taken. */
+    isGunTaken : boolean;
     takeTheGun();
     giveTheGunBack();
 }
@@ -29,31 +40,52 @@ interface GunController {
 class IntelliSenseGunController implements GunController {
     private readonly configuration: vscode.WorkspaceConfiguration;
 
-    private readonly initialQuickSuggestions : boolean;
-    private readonly initialWordBasedSuggestions : boolean;
-    private readonly initialParameterHints : boolean;
-    private readonly initialsuggestOnTriggerCharacters : boolean;
+    isGunTaken: boolean;
+
+    private initialSettings = (new class {
+        private quickSuggestions : any;
+        private wordBasedSuggestions : boolean;
+        private parameterHints : boolean;
+        private suggestOnTriggerCharacters : boolean;
+
+        store(configuration : vscode.WorkspaceConfiguration) {
+            this.quickSuggestions = configuration.get("editor.quickSuggestions");
+            this.wordBasedSuggestions = configuration.get("editor.wordBasedSuggestions");
+            this.parameterHints = configuration.get("editor.parameterHints");
+            this.suggestOnTriggerCharacters = configuration.get("editor.suggestOnTriggerCharacters");    
+        }
+
+        restore(configuration : vscode.WorkspaceConfiguration) {
+            configuration.update("editor.quickSuggestions", this.quickSuggestions);
+            configuration.update("editor.wordBasedSuggestions", this.wordBasedSuggestions);
+            configuration.update("editor.parameterHints", this.parameterHints);
+            configuration.update("editor.suggestOnTriggerCharacters", this.suggestOnTriggerCharacters);   
+        }
+    })
 
     constructor(configuration : vscode.WorkspaceConfiguration) {
         this.configuration = configuration;
-
-        this.initialQuickSuggestions = configuration.get("editor.quickSuggestions");
-        this.initialWordBasedSuggestions = configuration.get("editor.wordBasedSuggestions");
-        this.initialParameterHints = configuration.get("editor.parameterHints");
-        this.initialsuggestOnTriggerCharacters = configuration.get("editor.suggestOnTriggerCharacters");
+        this.isGunTaken = false;
     }
 
     takeTheGun() {
-        this.configuration.update("editor.quickSuggestions", false);
+        if (this.isGunTaken) return;
+
+        this.initialSettings.store(this.configuration);
+
+        this.configuration.update("editor.quickSuggestions", {other: false, comments: false, strings: false});
         this.configuration.update("editor.wordBasedSuggestions", false);
         this.configuration.update("editor.parameterHints", false);
         this.configuration.update("editor.suggestOnTriggerCharacters", false);
+
+        this.isGunTaken = true;
     }
 
     giveTheGunBack() {
-        this.configuration.update("editor.quickSuggestions", this.initialQuickSuggestions);
-        this.configuration.update("editor.wordBasedSuggestions", this.initialWordBasedSuggestions);
-        this.configuration.update("editor.parameterHints", this.initialParameterHints);
-        this.configuration.update("editor.suggestOnTriggerCharacters", this.initialsuggestOnTriggerCharacters);
+        if (!this.isGunTaken) return;
+
+        this.initialSettings.restore(this.configuration);
+
+        this.isGunTaken = false;
     }
 }
