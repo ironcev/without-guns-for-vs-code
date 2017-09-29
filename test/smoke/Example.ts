@@ -1,6 +1,15 @@
 import * as vscode from "vscode";
 
-class ExampleClass {
+interface ExampleInterface {
+    boolProperty : boolean;
+    numberProperty : number;
+}
+
+abstract class BaseExampleClass {
+
+}
+
+class ExampleClass extends BaseExampleClass implements ExampleInterface {
     boolProperty : boolean;
     numberProperty : number;
 

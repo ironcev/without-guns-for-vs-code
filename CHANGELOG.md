@@ -1,9 +1,13 @@
-# Change Log 
-[The change log is yet to come. The below text is the standard template created by the Yeoman extension generator.]
+# Changelog
+All notable changes to the "Without Guns" extension will be documented in this file.
 
-All notable changes to the "without-guns" extension will be documented in this file. 
- 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file. 
- 
+The format of the file is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+
 ## [Unreleased] 
-- Initial release
+### Added
+- Turns Syntax Highlighting on and off.
+- Turns Code Lens on and off.
+
+## [0.1.0] - 2017-09-28
+### Added
+- Turns IntelliSense on and off.

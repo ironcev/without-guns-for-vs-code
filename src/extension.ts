@@ -8,7 +8,8 @@ export function activate(context: vscode.ExtensionContext) {
 
     const gunControllers : gcons.GunController[] = [
         new gcons.IntelliSenseGunController(configuration),
-        new gcons.CodeLensGunController(configuration)
+        new gcons.CodeLensGunController(configuration),
+        new gcons.SyntaxHighlightingGunController(configuration)
     ]
 
     let gunsOff = vscode.commands.registerCommand('withoutGuns.gunsOff', () => {
