@@ -4,8 +4,11 @@ import * as vscode from 'vscode';
 import * as gcons from "./AllGunControllers";
 
 export function activate(context: vscode.ExtensionContext) {
+    const configuration = vscode.workspace.getConfiguration();
+
     const gunControllers : gcons.GunController[] = [
-        new gcons.IntelliSenseGunController(vscode.workspace.getConfiguration())
+        new gcons.IntelliSenseGunController(configuration),
+        new gcons.CodeLensGunController(configuration)
     ]
 
     let gunsOff = vscode.commands.registerCommand('withoutGuns.gunsOff', () => {
