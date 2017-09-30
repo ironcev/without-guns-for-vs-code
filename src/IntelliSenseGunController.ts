@@ -1,8 +1,9 @@
 import * as vscode from 'vscode';
+import ConfigurationProvider from './ConfigurationProvider';
 import GunController from './GunController';
 
 export default class IntelliSenseGunController implements GunController {
-    private readonly configuration: vscode.WorkspaceConfiguration;
+    private readonly configurationProvider: ConfigurationProvider;
 
     isGunTaken: boolean;
 
@@ -27,20 +28,21 @@ export default class IntelliSenseGunController implements GunController {
         }
     })
 
-    constructor(configuration : vscode.WorkspaceConfiguration) {
-        this.configuration = configuration;
+    constructor(configurationProvider: ConfigurationProvider) {
+        this.configurationProvider = configurationProvider;
         this.isGunTaken = false;
     }
 
     takeTheGun() {
         if (this.isGunTaken) return;
 
-        this.initialSettings.store(this.configuration);
+        let configuration = this.configurationProvider.getConfiguration();
+        this.initialSettings.store(configuration);
 
-        this.configuration.update("editor.quickSuggestions", {other: false, comments: false, strings: false});
-        this.configuration.update("editor.wordBasedSuggestions", false);
-        this.configuration.update("editor.parameterHints", false);
-        this.configuration.update("editor.suggestOnTriggerCharacters", false);
+        configuration.update("editor.quickSuggestions", {other: false, comments: false, strings: false});
+        configuration.update("editor.wordBasedSuggestions", false);
+        configuration.update("editor.parameterHints", false);
+        configuration.update("editor.suggestOnTriggerCharacters", false);
 
         this.isGunTaken = true;
     }
@@ -48,7 +50,8 @@ export default class IntelliSenseGunController implements GunController {
     giveTheGunBack() {
         if (!this.isGunTaken) return;
 
-        this.initialSettings.restore(this.configuration);
+        let configuration = this.configurationProvider.getConfiguration();
+        this.initialSettings.restore(configuration);
 
         this.isGunTaken = false;
     }

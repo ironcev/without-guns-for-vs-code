@@ -1,11 +1,12 @@
 import * as vscode from 'vscode';
 import * as json from 'load-json-file';
 import GunController from './GunController';
+import ConfigurationProvider from './ConfigurationProvider';
 import path = require('path');
 
 
 export default class SyntaxHighlightingGunController implements GunController {
-    private readonly configuration: vscode.WorkspaceConfiguration;
+    private readonly configurationProvider: ConfigurationProvider;
 
     isGunTaken: boolean;
 
@@ -21,17 +22,19 @@ export default class SyntaxHighlightingGunController implements GunController {
         }
     })
 
-    constructor(configuration : vscode.WorkspaceConfiguration) {
-        this.configuration = configuration;
+    constructor(configurationProvider : ConfigurationProvider) {
+        this.configurationProvider = configurationProvider;
         this.isGunTaken = false;
     }
 
     takeTheGun() {
         if (this.isGunTaken) return;
 
-        this.initialSettings.store(this.configuration);
+        let configuration = this.configurationProvider.getConfiguration();
+        this.initialSettings.store(configuration);
 
-        this.configuration.update("editor.tokenColorCustomizations", this.createTokenColorCustomizations());
+        let currentThemeId = configuration.get<string>("workbench.colorTheme");
+        configuration.update("editor.tokenColorCustomizations", this.createTokenColorCustomizations(currentThemeId));
 
         this.isGunTaken = true;
     }
@@ -39,13 +42,14 @@ export default class SyntaxHighlightingGunController implements GunController {
     giveTheGunBack() {
         if (!this.isGunTaken) return;
 
-        this.initialSettings.restore(this.configuration);
+        let configuration = this.configurationProvider.getConfiguration();
+        this.initialSettings.restore(configuration);
 
         this.isGunTaken = false;
     }
 
-    private createTokenColorCustomizations() {
-        let editorForegroundColor = this.getEditorForegroundColor();
+    private createTokenColorCustomizations(currentThemeId : string) {
+        let editorForegroundColor = this.getEditorForegroundColor(currentThemeId);
 
         let textMateRules =
             SyntaxHighlightingGunController.getCSharpTokenColorCustomizations()
@@ -88,19 +92,18 @@ export default class SyntaxHighlightingGunController implements GunController {
         ]
     }
 
-    private getEditorForegroundColor() {
+    private getEditorForegroundColor(currentThemeId : string) {
         // VS Code API does not directly support getting the configuration of
         // the current theme :-(
         // So we need a bit of API acrobatics here.
 
         // Let's start with a fallback that will be acceptable on both
-        // light and dark themes - gray color :-)
+        // light and dark themes - blue color, hopefully :-)
         // We will use this if anything goes wrong with the resolution
         // of the editor foreground color defined by the theme.
-        let fallbackColor = "#D4D4D4";
+        let fallbackColor = "#0000ff";
 
-        let currentTheme = this.configuration.get("workbench.colorTheme");
-        if (!currentTheme) return fallbackColor; // Should never happen, but let's be paranoic.
+        if (!currentThemeId) return fallbackColor; // Should never happen, but let's be paranoic.
 
         // Luckily, themes are extensions. So we will try to find the
         // extension that corresponds to the current theme.
@@ -113,7 +116,7 @@ export default class SyntaxHighlightingGunController implements GunController {
             // E.g. the dark theme comes with several variations: Dark+, Dark Visual Studio, ...
             .reduce((previous, current) => previous.concat(current), Array.of<any>())
             // Get the one for the current theme.
-            .filter(theme => theme.id == currentTheme || theme.label == currentTheme);
+            .filter(theme => theme.id == currentThemeId || theme.label == currentThemeId);
         if (!currentThemeExtensionAsArray) return fallbackColor; // Paranoic again.
 
         if (currentThemeExtensionAsArray.length < 1) return fallbackColor; // And again...
