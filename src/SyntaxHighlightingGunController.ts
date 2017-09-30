@@ -1,13 +1,11 @@
 import * as vscode from 'vscode';
 import * as json from 'load-json-file';
-import GunController from './GunController';
+import ConfigurationDependentGunController from './ConfigurationDependentGunController';
 import ConfigurationProvider from './ConfigurationProvider';
 import path = require('path');
 
 
-export default class SyntaxHighlightingGunController extends GunController {
-    private readonly configurationProvider: ConfigurationProvider;
-
+export default class SyntaxHighlightingGunController extends ConfigurationDependentGunController {
     private initialSettings = (new class {
         private tokenColorCustomizations : any;
 
@@ -21,20 +19,17 @@ export default class SyntaxHighlightingGunController extends GunController {
     })
 
     constructor(configurationProvider : ConfigurationProvider) {
-        super();
-        this.configurationProvider = configurationProvider;
+        super(configurationProvider);
     }
 
-    takeTheGunCore() {
-        let configuration = this.configurationProvider.getConfiguration();
+    takeTheGunWithConfigurationCore(configuration : vscode.WorkspaceConfiguration) {
         this.initialSettings.store(configuration);
 
         let currentThemeId = configuration.get<string>("workbench.colorTheme");
         configuration.update("editor.tokenColorCustomizations", this.createTokenColorCustomizations(currentThemeId));
     }
 
-    giveTheGunBackCore() {
-        let configuration = this.configurationProvider.getConfiguration();
+    giveTheGunBackWithConfigurationCore(configuration : vscode.WorkspaceConfiguration) {
         this.initialSettings.restore(configuration);
     }
 

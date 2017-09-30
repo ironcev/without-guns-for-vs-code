@@ -1,10 +1,9 @@
 import * as vscode from 'vscode';
 import ConfigurationProvider from './ConfigurationProvider';
 import GunController from './GunController';
+import ConfigurationDependentGunController from './ConfigurationDependentGunController';
 
-export default class IntelliSenseGunController extends GunController {
-    private readonly configurationProvider: ConfigurationProvider;
-
+export default class IntelliSenseGunController extends ConfigurationDependentGunController {
     private initialSettings = (new class {
         private quickSuggestions : any;
         private wordBasedSuggestions : boolean;
@@ -27,12 +26,10 @@ export default class IntelliSenseGunController extends GunController {
     })
 
     constructor(configurationProvider: ConfigurationProvider) {
-        super();
-        this.configurationProvider = configurationProvider;
+        super(configurationProvider);
     }
 
-    takeTheGunCore() {
-        let configuration = this.configurationProvider.getConfiguration();
+    takeTheGunWithConfigurationCore(configuration : vscode.WorkspaceConfiguration) {
         this.initialSettings.store(configuration);
 
         configuration.update("editor.quickSuggestions", {other: false, comments: false, strings: false});
@@ -41,8 +38,7 @@ export default class IntelliSenseGunController extends GunController {
         configuration.update("editor.suggestOnTriggerCharacters", false);
     }
 
-    giveTheGunBackCore() {
-        let configuration = this.configurationProvider.getConfiguration();
+    giveTheGunBackWithConfigurationCore(configuration : vscode.WorkspaceConfiguration) {
         this.initialSettings.restore(configuration);
     }
 }
