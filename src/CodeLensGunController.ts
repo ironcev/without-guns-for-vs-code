@@ -2,10 +2,8 @@ import * as vscode from 'vscode';
 import ConfigurationProvider from './ConfigurationProvider';
 import GunController from './GunController';
 
-export default class CodeLensGunController implements GunController {
+export default class CodeLensGunController extends GunController {
     private readonly configurationProvider: ConfigurationProvider;
-
-    isGunTaken: boolean;
 
     private initialSettings = (new class {
         private codeLens : boolean;
@@ -20,27 +18,19 @@ export default class CodeLensGunController implements GunController {
     })
 
     constructor(configurationProvider: ConfigurationProvider) {
+        super();
         this.configurationProvider = configurationProvider;
-        this.isGunTaken = false;
     }
 
-    takeTheGun() {
-        if (this.isGunTaken) return;
-
+    takeTheGunCore() {
         let configuration = this.configurationProvider.getConfiguration();
         this.initialSettings.store(configuration);
 
         configuration.update("editor.codeLens", false);
-
-        this.isGunTaken = true;
     }
 
-    giveTheGunBack() {
-        if (!this.isGunTaken) return;
-
+    giveTheGunBackCore() {
         let configuration = this.configurationProvider.getConfiguration();
         this.initialSettings.restore(configuration);
-
-        this.isGunTaken = false;
     }
 }

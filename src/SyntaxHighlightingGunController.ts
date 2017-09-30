@@ -5,10 +5,8 @@ import ConfigurationProvider from './ConfigurationProvider';
 import path = require('path');
 
 
-export default class SyntaxHighlightingGunController implements GunController {
+export default class SyntaxHighlightingGunController extends GunController {
     private readonly configurationProvider: ConfigurationProvider;
-
-    isGunTaken: boolean;
 
     private initialSettings = (new class {
         private tokenColorCustomizations : any;
@@ -23,29 +21,21 @@ export default class SyntaxHighlightingGunController implements GunController {
     })
 
     constructor(configurationProvider : ConfigurationProvider) {
+        super();
         this.configurationProvider = configurationProvider;
-        this.isGunTaken = false;
     }
 
-    takeTheGun() {
-        if (this.isGunTaken) return;
-
+    takeTheGunCore() {
         let configuration = this.configurationProvider.getConfiguration();
         this.initialSettings.store(configuration);
 
         let currentThemeId = configuration.get<string>("workbench.colorTheme");
         configuration.update("editor.tokenColorCustomizations", this.createTokenColorCustomizations(currentThemeId));
-
-        this.isGunTaken = true;
     }
 
-    giveTheGunBack() {
-        if (!this.isGunTaken) return;
-
+    giveTheGunBackCore() {
         let configuration = this.configurationProvider.getConfiguration();
         this.initialSettings.restore(configuration);
-
-        this.isGunTaken = false;
     }
 
     private createTokenColorCustomizations(currentThemeId : string) {
