@@ -42,7 +42,8 @@ export default class SyntaxHighlightingGunController extends ConfigurationDepend
                 .map(scopeName => ({
                     scope: scopeName,
                     settings: {
-                        foreground: editorForegroundColor
+                        foreground: editorForegroundColor,
+                        fontStyle : ""
                     }
                 }));
 
