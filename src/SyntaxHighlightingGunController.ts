@@ -178,6 +178,7 @@ export default class SyntaxHighlightingGunController extends ConfigurationDepend
             "entity.name.tag",
             "entity.name.tag.css",
             "entity.name.type",
+            "entity.name.variable.parameter",
             "entity.other.attribute-name",
             "entity.other.attribute-name, meta.tag punctuation.definition.string",
             "entity.other.attribute-name.attribute.scss",

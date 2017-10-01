@@ -40,7 +40,7 @@ suite("Data Generator", () => {
         .map(scope => Array.isArray(scope) ? scope : [scope])
         .reduce((previous, current) => previous.concat(current), Array.of<string>())
         // Add some which are used but were not always found in the themes.
-        .concat(["support.type.primitive"])
+        .concat(["support.type.primitive", "entity.name.variable.parameter"])
         // Sort them. Just a matter of taste :-)
         .sort((first, second) => first.localeCompare(second));
 
