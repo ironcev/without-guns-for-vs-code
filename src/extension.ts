@@ -2,6 +2,7 @@
 
 import * as vscode from 'vscode';
 import * as gcons from "./AllGunControllers";
+import WithoutGunsExtension from './WithoutGunsExtension';
 
 export function activate(context: vscode.ExtensionContext) {
     const gunControllers : gcons.GunController[] = [
@@ -10,14 +11,15 @@ export function activate(context: vscode.ExtensionContext) {
         new gcons.SyntaxHighlightingGunController(vscode.workspace)
     ]
 
+    let withoutGunsExtension = new WithoutGunsExtension(gunControllers);
+
     let gunsOff = vscode.commands.registerCommand('withoutGuns.gunsOff', () => {
-        gunControllers.forEach(gunController => gunController.takeTheGun());
+        withoutGunsExtension.takeTheGuns();
     });
 
     let gunsOn = vscode.commands.registerCommand('withoutGuns.gunsOn', () => {
-        gunControllers.forEach(gunController => gunController.giveTheGunBack());
+        withoutGunsExtension.giveTheGunsBack();
     });
 
-   context.subscriptions.push(gunsOff);
-   context.subscriptions.push(gunsOn);
+   context.subscriptions.push(gunsOff, gunsOn);
 }
