@@ -11,12 +11,10 @@ export function activate(context: vscode.ExtensionContext) {
     ]
 
     let gunsOff = vscode.commands.registerCommand('withoutGuns.gunsOff', () => {
-        vscode.window.showInformationMessage('We just took your guns. That\'s for your own good.');
         gunControllers.forEach(gunController => gunController.takeTheGun());
     });
 
     let gunsOn = vscode.commands.registerCommand('withoutGuns.gunsOn', () => {
-        vscode.window.showInformationMessage('You got your guns back. Be careful what you do with them.');
         gunControllers.forEach(gunController => gunController.giveTheGunBack());
     });
 
