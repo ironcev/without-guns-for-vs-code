@@ -19,11 +19,11 @@
     "commands": [
       {
         "command": "withoutGuns.gunsOff",
-        "title": "Guns Off"
+        "title": "Guns: Off"
       },
       {
         "command": "withoutGuns.gunsOn",
-        "title": "Guns On"
+        "title": "Guns: On"
       }
     ]
   },
