@@ -11,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
         new gcons.SyntaxHighlightingGunController(vscode.workspace)
     ]
 
-    let withoutGunsExtension = new WithoutGunsExtension(gunControllers);
+    let withoutGunsExtension = new WithoutGunsExtension(gunControllers, vscode.workspace);
 
     let gunsOff = vscode.commands.registerCommand('withoutGuns.gunsOff', () => {
         withoutGunsExtension.takeTheGuns();
