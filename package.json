@@ -32,11 +32,11 @@
         "commandPalette": [
           {
             "command": "withoutGuns.gunsOff",
-            "when": "!config.withoutGuns.internal.areGunsOff"
+            "when": "!config._withoutGuns.internal.areGunsOff"
           },
           {
             "command": "withoutGuns.gunsOn",
-            "when": "config.withoutGuns.internal.areGunsOff"
+            "when": "config._withoutGuns.internal.areGunsOff"
           }
         ]
     },
@@ -44,7 +44,7 @@
       "type": "object",
       "title": "Without Guns Internal Configuration",
       "properties": {
-          "withoutGuns.internal.areGunsOff": {
+          "_withoutGuns.internal.areGunsOff": {
               "type": "boolean",
               "default": false,
               "description": "Internal configuration. >>> DO NOT MODIFY THIS CONFIGURATION MANUALLY! <<< This internal setting is set to true if the Guns are currently OFF. It is not meant to be modified manually."

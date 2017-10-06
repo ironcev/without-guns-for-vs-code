@@ -1,6 +1,8 @@
 import GunController from './GunController';
 import ConfigurationProvider from './ConfigurationProvider'
 
+const ARE_GUNS_OFF_SETTING = "_withoutGuns.internal.areGunsOff"
+
 export default class WithoutGunsExtension {
     /** True if the guns are currently taken. We assume that the guns are initially never taken. */
     private areGunsTaken : boolean = false;
@@ -10,7 +12,7 @@ export default class WithoutGunsExtension {
         if (this.areGunsTaken) return;
 
         this.gunControllers.forEach(gunController => gunController.takeTheGun());
-        this.configurationProvider.getConfiguration().update("withoutGuns.internal.areGunsOff", true); // TODO-IG: Introduce a constant for the setting.
+        this.configurationProvider.getConfiguration().update(ARE_GUNS_OFF_SETTING, true);
 
         this.areGunsTaken = true;
     }
@@ -19,7 +21,7 @@ export default class WithoutGunsExtension {
         if (!this.areGunsTaken) return;
 
         this.gunControllers.forEach(gunController => gunController.giveTheGunBack());
-        this.configurationProvider.getConfiguration().update("withoutGuns.internal.areGunsOff", undefined);
+        this.configurationProvider.getConfiguration().update(ARE_GUNS_OFF_SETTING, undefined);
 
         this.areGunsTaken = false;
     }
