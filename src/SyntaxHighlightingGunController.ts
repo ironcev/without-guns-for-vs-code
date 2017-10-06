@@ -43,17 +43,13 @@ export default class SyntaxHighlightingGunController extends ConfigurationDepend
             strings: editorForegroundColor,
             types : editorForegroundColor,
             variables : editorForegroundColor,
-            // Strangely, in the generated settings file, VS code is underlying the textMateRules
-            // section and is showing the following error: Incorrect type. Expected "array"
-            // But on the other side, everything works fine.
-            // So let it leave as it is.
-            textMateRules : {
+            textMateRules : [{
                 scope: SyntaxHighlightingGunController.getTextMateScopes(),
                 settings: {
                     foreground: editorForegroundColor,
                     fontStyle : ""            
                 }
-            }
+            }]
         };
     }
 
