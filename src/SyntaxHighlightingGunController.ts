@@ -1,35 +1,18 @@
-import * as vscode from 'vscode';
+import { WorkspaceConfiguration } from 'vscode';
+import { extensions } from 'vscode';
 import * as json from 'load-json-file';
 import ConfigurationDependentGunController from './ConfigurationDependentGunController';
 import ConfigurationProvider from './ConfigurationProvider';
 import path = require('path');
 
 export default class SyntaxHighlightingGunController extends ConfigurationDependentGunController {
-    private initialSettings = (new class {
-        private tokenColorCustomizations : any;
-
-        store(configuration : vscode.WorkspaceConfiguration) {
-            this.tokenColorCustomizations = configuration.get("editor.tokenColorCustomizations");
-        }
-
-        restore(configuration : vscode.WorkspaceConfiguration) {
-            configuration.update("editor.tokenColorCustomizations", this.tokenColorCustomizations);
-        }
-    })
-
     constructor(configurationProvider : ConfigurationProvider) {
-        super(configurationProvider);
+        super(configurationProvider, undefined);
     }
 
-    takeTheGunWithConfigurationCore(configuration : vscode.WorkspaceConfiguration) {
-        this.initialSettings.store(configuration);
-
+    protected getGunlessSettings(configuration : WorkspaceConfiguration) : any {
         let currentThemeId = configuration.get<string>("workbench.colorTheme", "");
-        configuration.update("editor.tokenColorCustomizations", this.createTokenColorCustomizations(currentThemeId));
-    }
-
-    giveTheGunBackWithConfigurationCore(configuration : vscode.WorkspaceConfiguration) {
-        this.initialSettings.restore(configuration);
+        return { "editor.tokenColorCustomizations" : this.createTokenColorCustomizations(currentThemeId) };
     }
 
     private createTokenColorCustomizations(currentThemeId : string) {
@@ -89,7 +72,7 @@ export default class SyntaxHighlightingGunController extends ConfigurationDepend
 
         // Luckily, themes are extensions. So we will try to find the
         // extension that corresponds to the current theme.
-        let currentThemeExtensionAsArray = vscode.extensions.all
+        let currentThemeExtensionAsArray = extensions.all
             // Filter only the theme extensions.
             .filter(extension => extension.packageJSON.contributes.themes)
             // Combine the extension metadata and the theme configuration. We will need both later.

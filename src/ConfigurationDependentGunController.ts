@@ -1,31 +1,67 @@
-import * as vscode from 'vscode';
+import { WorkspaceConfiguration } from 'vscode';
 import GunController from './GunController';
 import ConfigurationProvider from './ConfigurationProvider';
 
 /**
- *  A gun controller that implements its behavior by modifying the Workspace Configuration.
- * 
- *  If a gun controller needs to manipulate VS Code settings (Workspace Configuration)
- *  in order to achieve the control, then it should do the following:
- *  - Store the current VS Code settings each time when taking the gun.
- *  - The settings are stored in a private field called "initialSettings".
- *  - Restore the settings when giving the gun back.
+ * A gun controller that implements its behavior by modifying the Workspace Configuration.
+ *
+ * The configuration settings that have to be changed are provided via constructor's
+ * "gunlessSettings" parameter. In a rare case when the gunless settings are not hardcoded but
+ * have to be calculated at run-time, the "getGunlessSettings()" method should be overriden
+ * to return the gunless settings. This method will be called only once, the first time when
+ * the Guns are turned OFF.
  */
 export default abstract class ConfigurationDependentGunController extends GunController {
-    constructor(private readonly configurationProvider : ConfigurationProvider) {
+    /**
+     * The settings that had been configured in the workspace settings before
+     * the gunless settings were applied.
+     */
+    private initialSettings : any;
+
+    constructor(private readonly configurationProvider : ConfigurationProvider, private gunlessSettings : any | undefined) {
         super();
     }
 
-    takeTheGunCore() {
+    protected takeTheGunCore() {
         let configuration = this.configurationProvider.getConfiguration();
-        this.takeTheGunWithConfigurationCore(configuration);
+
+        if (this.gunlessSettings == undefined)
+            this.gunlessSettings = this.getGunlessSettings(configuration);
+
+        this.storeInitialSettings(configuration);
+        this.applyGunlessSettings(configuration);
     }
 
-    giveTheGunBackCore() {
+    protected giveTheGunBackCore() {
         let configuration = this.configurationProvider.getConfiguration();
-        this.giveTheGunBackWithConfigurationCore(configuration);
+        this.restoreInitialSettings(configuration);
     }
 
-    protected abstract takeTheGunWithConfigurationCore(configuration : vscode.WorkspaceConfiguration) : void;
-    protected abstract giveTheGunBackWithConfigurationCore(configuration : vscode.WorkspaceConfiguration) : void;
+    protected storeInitialSettings(configuration: WorkspaceConfiguration) {
+        this.initialSettings = {};
+        for (var property in this.gunlessSettings) {
+            this.initialSettings[property] = this.getWorkspaceValueForSetting(property, configuration);
+        }
+    }
+
+    private getWorkspaceValueForSetting(setting : string, configuration: WorkspaceConfiguration) {
+        const allConfiguration = configuration.inspect(setting);
+        if (allConfiguration == undefined) return undefined;
+        return allConfiguration.workspaceValue;
+    }
+
+    protected applyGunlessSettings(configuration: WorkspaceConfiguration) {
+        for (var property in this.gunlessSettings) {
+            configuration.update(property, this.gunlessSettings[property]);
+        }
+    }
+
+    protected restoreInitialSettings(configuration: WorkspaceConfiguration) {
+        for (var property in this.gunlessSettings) {
+            configuration.update(property, this.initialSettings[property]);
+        }
+        this.initialSettings = undefined;
+    }
+
+    protected getGunlessSettings(configuration : WorkspaceConfiguration) : any { return undefined; }
 }

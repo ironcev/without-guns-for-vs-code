@@ -9,7 +9,12 @@ export function activate(context: vscode.ExtensionContext) {
         new gcons.SyntaxHighlightingGunController(vscode.workspace)
     ]
 
-    let withoutGunsExtension = new WithoutGunsExtension(gunControllers, vscode.workspace);
+    const host = (new class {
+        isFolderOpen = () => vscode.workspace.workspaceFolders != undefined;
+        showInformationMessage = (message : string) => vscode.window.showInformationMessage(message);
+    });
+
+    let withoutGunsExtension = new WithoutGunsExtension(gunControllers, vscode.workspace, host);
 
     let gunsOff = vscode.commands.registerCommand('withoutGuns.gunsOff', () => {
         withoutGunsExtension.takeTheGuns();
@@ -19,5 +24,5 @@ export function activate(context: vscode.ExtensionContext) {
         withoutGunsExtension.giveTheGunsBack();
     });
 
-   context.subscriptions.push(gunsOff, gunsOn);
+    context.subscriptions.push(gunsOff, gunsOn);
 }
