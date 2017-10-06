@@ -15,34 +15,34 @@ suite("Data Generator", () => {
         // Filter only the theme extensions.
         .filter(extension => extension.packageJSON.contributes.themes)
         // Combine the extension metadata and the theme configuration. We will need both later.
-        .map(extension => extension.packageJSON.contributes.themes.map(theme => ({...theme, extension })))
+        .map(extension => extension.packageJSON.contributes.themes.map((theme : any) => ({...theme, extension })))
         // A single theme is actually array of theme because a theme can potentially have variations.
         // E.g. the dark theme comes with several variations: Dark+, Dark Visual Studio, ...
         .reduce((previous, current) => previous.concat(current), Array.of<any>())
-        .map(theme => path.join(theme.extension.extensionPath, theme.path))
+        .map((theme : any) => path.join(theme.extension.extensionPath, theme.path))
         // Why the try catch? See the comment in Syntax Highlighting Gun Controller (in parsing the theme configurations).
-        .map(themePath => {try {return json.sync(themePath);} catch {return undefined}})
+        .map((themePath : any) => {try {return json.sync(themePath);} catch {return undefined}})
         // Ignore those that we couldn't past. Who cares, we will anyway have enough of scopes collected.
-        .filter(themeConfiguration => themeConfiguration != undefined)
+        .filter((themeConfiguration : any)=> themeConfiguration != undefined)
         // Get only those that define token colors. There are e.g. include themes configurations that do
         // not contain token colors definitions.
-        .filter(themeConfiguration => themeConfiguration.tokenColors)
+        .filter((themeConfiguration : any) => themeConfiguration.tokenColors)
         // Get the token colors arrays.
-        .map(themeConfiguration => themeConfiguration.tokenColors)
+        .map((themeConfiguration : any) => themeConfiguration.tokenColors)
         // Reduce them to a single array.
-        .reduce((previous, current) => previous.concat(current), Array.of<any>())
+        .reduce((previous : any, current : any) => previous.concat(current), Array.of<any>())
         // Get only those that have the scope property defined (most of them, but not all ;-)).
-        .filter(tokenColor => tokenColor.scope)
+        .filter((tokenColor : any)=> tokenColor.scope)
         // Get the scope strings.
-        .map(tokenColor => tokenColor.scope)
+        .map((tokenColor : any) => tokenColor.scope)
         // Scope can be either an array of single scopes (strings) or just a single string.
         // So let's turn them all into arrays and reduce to a single array.
-        .map(scope => Array.isArray(scope) ? scope : [scope])
-        .reduce((previous, current) => previous.concat(current), Array.of<string>())
+        .map((scope : any) => Array.isArray(scope) ? scope : [scope])
+        .reduce((previous : any, current : any) => previous.concat(current), Array.of<string>())
         // Add some which are used but were not always found in the themes.
         .concat(["support.type.primitive", "entity.name.variable.parameter"])
         // Sort them. Just a matter of taste :-)
-        .sort((first, second) => first.localeCompare(second));
+        .sort((first : any, second : any) => first.localeCompare(second));
 
         let uniqueScopes = Array.from(new Set<string>(allScopes));
 

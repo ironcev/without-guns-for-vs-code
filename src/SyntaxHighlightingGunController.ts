@@ -24,7 +24,7 @@ export default class SyntaxHighlightingGunController extends ConfigurationDepend
     takeTheGunWithConfigurationCore(configuration : vscode.WorkspaceConfiguration) {
         this.initialSettings.store(configuration);
 
-        let currentThemeId = configuration.get<string>("workbench.colorTheme");
+        let currentThemeId = configuration.get<string>("workbench.colorTheme", "");
         configuration.update("editor.tokenColorCustomizations", this.createTokenColorCustomizations(currentThemeId));
     }
 
@@ -93,12 +93,12 @@ export default class SyntaxHighlightingGunController extends ConfigurationDepend
             // Filter only the theme extensions.
             .filter(extension => extension.packageJSON.contributes.themes)
             // Combine the extension metadata and the theme configuration. We will need both later.
-            .map(extension => extension.packageJSON.contributes.themes.map(theme => ({...theme, extension })))
+            .map(extension => extension.packageJSON.contributes.themes.map((theme : any) => ({...theme, extension })))
             // A single theme is actually array of theme because a theme can potentially have variations.
             // E.g. the dark theme comes with several variations: Dark+, Dark Visual Studio, ...
             .reduce((previous, current) => previous.concat(current), Array.of<any>())
             // Get the one for the current theme.
-            .filter(theme => theme.id == currentThemeId || theme.label == currentThemeId);
+            .filter((theme : any) => theme.id == currentThemeId || theme.label == currentThemeId);
         if (!currentThemeExtensionAsArray) return fallbackColor; // Paranoic again.
 
         if (currentThemeExtensionAsArray.length < 1) return fallbackColor; // And again...

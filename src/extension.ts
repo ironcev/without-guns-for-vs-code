@@ -1,5 +1,3 @@
-'use strict';
-
 import * as vscode from 'vscode';
 import * as gcons from "./AllGunControllers";
 import WithoutGunsExtension from './WithoutGunsExtension';
