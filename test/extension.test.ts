@@ -46,12 +46,6 @@ suite("Data Generator", () => {
 
         let uniqueScopes = Array.from(new Set<string>(allScopes));
 
-        console.log(
-            '[' +
-                uniqueScopes
-                    .map(scope => '"' + scope + '"')
-                    .join(',\n')
-            + ']'
-        );
+        console.log(`[${uniqueScopes.map(scope => `"${scope}"`).join(',\n')}]`);
     }); 
 });
