@@ -36,18 +36,39 @@ export default class SyntaxHighlightingGunController extends ConfigurationDepend
         let editorForegroundColor = this.getEditorForegroundColor(currentThemeId);
 
         return {
-            comments : editorForegroundColor,
-            functions : editorForegroundColor,
-            keywords : editorForegroundColor,
-            numbers : editorForegroundColor,
-            strings: editorForegroundColor,
-            types : editorForegroundColor,
-            variables : editorForegroundColor,
-            textMateRules : [{
+            comments: {
+                foreground: editorForegroundColor,
+                fontStyle: ""            
+            },
+            functions: {
+                foreground: editorForegroundColor,
+                fontStyle: ""            
+            },
+            keywords: {
+                foreground: editorForegroundColor,
+                fontStyle: ""            
+            },
+            numbers: {
+                foreground: editorForegroundColor,
+                fontStyle: ""            
+            },
+            strings: {
+                foreground: editorForegroundColor,
+                fontStyle: ""            
+            },
+            types: {
+                foreground: editorForegroundColor,
+                fontStyle: ""            
+            },
+            variables: {
+                foreground: editorForegroundColor,
+                fontStyle: ""            
+            },
+            textMateRules: [{
                 scope: SyntaxHighlightingGunController.getTextMateScopes(),
                 settings: {
                     foreground: editorForegroundColor,
-                    fontStyle : ""            
+                    fontStyle: ""            
                 }
             }]
         };
