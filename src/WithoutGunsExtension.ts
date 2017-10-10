@@ -1,7 +1,7 @@
 import GunController from './GunController';
 import ConfigurationProvider from './ConfigurationProvider'
 
-const ARE_GUNS_OFF_SETTING = "_withoutGuns.internal.areGunsOff"
+const ARE_GUNS_TAKEN_SETTING = "_withoutGuns.internal.areGunsTaken"
 
 export default class WithoutGunsExtension {
     /** True if the guns are currently taken. We assume that the guns are initially never taken. */
@@ -14,12 +14,12 @@ export default class WithoutGunsExtension {
 
     takeTheGuns() {
         if (!this.host.isFolderOpen()) {
-            this.host.showInformationMessage("Guns can be turned OFF only if there is a folder open in the workspace.");
+            this.host.showInformationMessage("Guns can be taken only if there is a folder open in the workspace.");
             return;
         }
 
         this.gunControllers.forEach(gunController => gunController.takeTheGun());
-        this.configurationProvider.getConfiguration().update(ARE_GUNS_OFF_SETTING, true);
+        this.configurationProvider.getConfiguration().update(ARE_GUNS_TAKEN_SETTING, true);
 
         this.areGunsTaken = true;
     }
@@ -28,7 +28,7 @@ export default class WithoutGunsExtension {
         if (!this.areGunsTaken) return;
 
         this.gunControllers.forEach(gunController => gunController.giveTheGunBack());
-        this.configurationProvider.getConfiguration().update(ARE_GUNS_OFF_SETTING, undefined);
+        this.configurationProvider.getConfiguration().update(ARE_GUNS_TAKEN_SETTING, undefined);
 
         this.areGunsTaken = false;
     }

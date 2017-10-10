@@ -11,32 +11,32 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:withoutGuns.gunsOff",
-    "onCommand:withoutGuns.gunsOn"
+    "onCommand:withoutGuns.takeTheGuns",
+    "onCommand:withoutGuns.giveTheGunsBack"
   ],
   "main": "./out/src/extension",
   "contributes": {
     "commands": [
       {
-        "command": "withoutGuns.gunsOff",
-        "title": "Off",
+        "command": "withoutGuns.takeTheGuns",
+        "title": "Without",
         "category": "Guns"
       },
       {
-        "command": "withoutGuns.gunsOn",
-        "title": "On",
+        "command": "withoutGuns.giveTheGunsBack",
+        "title": "With",
         "category": "Guns"
       }
     ],
     "menus": {
         "commandPalette": [
           {
-            "command": "withoutGuns.gunsOff",
-            "when": "!config._withoutGuns.internal.areGunsOff"
+            "command": "withoutGuns.takeTheGuns",
+            "when": "!config._withoutGuns.internal.areGunsTaken"
           },
           {
-            "command": "withoutGuns.gunsOn",
-            "when": "config._withoutGuns.internal.areGunsOff"
+            "command": "withoutGuns.giveTheGunsBack",
+            "when": "config._withoutGuns.internal.areGunsTaken"
           }
         ]
     },
@@ -44,10 +44,10 @@
       "type": "object",
       "title": "Without Guns Internal Configuration",
       "properties": {
-          "_withoutGuns.internal.areGunsOff": {
+          "_withoutGuns.internal.areGunsTaken": {
               "type": "boolean",
               "default": false,
-              "description": "Internal configuration. >>> DO NOT MODIFY THIS CONFIGURATION MANUALLY! <<< This internal setting is set to true if the Guns are currently OFF. It is not meant to be modified manually."
+              "description": "Internal configuration. >>> DO NOT MODIFY THIS CONFIGURATION MANUALLY! <<< This internal setting is set to true if the Guns are currently taken. It is not meant to be modified manually."
           }
       }
   }

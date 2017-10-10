@@ -9,7 +9,7 @@ import ConfigurationProvider from './ConfigurationProvider';
  * "gunlessSettings" parameter. In a rare case when the gunless settings are not hardcoded but
  * have to be calculated at run-time, the "getGunlessSettings()" method should be overriden
  * to return the gunless settings. This method will be called only once, the first time when
- * the Guns are turned OFF.
+ * the Guns are turned taken.
  */
 export default abstract class ConfigurationDependentGunController extends GunController {
     /**

@@ -5,7 +5,7 @@ The format of the file is based on [Keep a Changelog](http://keepachangelog.com/
 
 ## [Unreleased] 
 ### Added
-- "Guns: On" and "Guns: Off" commands are context sensitive. (They are active only if the Guns are currently not On or not Off, respectively.)
+- "Guns: With" and "Guns: Without" commands are context sensitive. (They are active only if the Guns are currently taken or not, respectively.)
 
 ## [0.2.0] - 2017-09-29
 ### Added

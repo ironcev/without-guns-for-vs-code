@@ -16,13 +16,13 @@ export function activate(context: vscode.ExtensionContext) {
 
     let withoutGunsExtension = new WithoutGunsExtension(gunControllers, vscode.workspace, host);
 
-    let gunsOff = vscode.commands.registerCommand('withoutGuns.gunsOff', () => {
+    let takeTheGuns = vscode.commands.registerCommand('withoutGuns.takeTheGuns', () => {
         withoutGunsExtension.takeTheGuns();
     });
 
-    let gunsOn = vscode.commands.registerCommand('withoutGuns.gunsOn', () => {
+    let giveTheGunsBack = vscode.commands.registerCommand('withoutGuns.giveTheGunsBack', () => {
         withoutGunsExtension.giveTheGunsBack();
     });
 
-    context.subscriptions.push(gunsOff, gunsOn);
+    context.subscriptions.push(takeTheGuns, giveTheGunsBack);
 }
