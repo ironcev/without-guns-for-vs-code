@@ -5,7 +5,7 @@ import * as json from 'load-json-file';
 import path = require('path');
 
 /** Generates useful data. */
-suite("Data Generator", () => {
+suite("Data Generators", () => {
     /** 
      * Generates TextMate Scopes based on the scopes that are used in the theme definitions used in the
      * VS Code at the time of runing the test.
