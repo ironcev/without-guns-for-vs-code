@@ -4,8 +4,13 @@
   "description": "Takes your guns from you and teaches you hand-to-hand combat",
   "version": "0.1.0",
   "publisher": "ironcev",
+  "icon": "images/logo.png",
   "engines": {
     "vscode": "^1.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ironcev/without-guns-for-vs-code"
   },
   "categories": [
     "Other"
