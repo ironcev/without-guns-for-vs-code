@@ -6,8 +6,7 @@ A [Visual Studio Code](https://code.visualstudio.com) extension that teaches you
 [![license](https://img.shields.io/github/license/ironcev/without-guns-for-vs-code.svg)]()
 
 ## About
-
-*Without Guns* allows you to quickly turn ON and OFF the following widely used Visual Studio Code features:
+*Without Guns* allows you to quickly turn ON and OFF the following Visual Studio Code features:
 - IntelliSense
 - Syntax Highlighting
 - Code Lens
@@ -15,11 +14,16 @@ A [Visual Studio Code](https://code.visualstudio.com) extension that teaches you
 When these features are turned OFF, we say that we code "without guns".
 
 Occasional coding without guns forces you to code mindfully and yields the following benefits:
-- Increased coding confidence
-- Deeper knowledge of programming language syntax and features
-- Deeper knowledge of used frameworks and libraries
+- **Increased coding confidence**
+- **Deeper knowledge of programming language syntax and features**
+- **Deeper knowledge of used frameworks and libraries**
 
 I suggest coding without guns whenever you learn something new, being that a new programming language, algorithm, framework or a technology.
+
+## Usage
+To start coding without guns simply call the `Guns: Without` command from the Command Palette. To get the guns back, call the `Guns: With` command. An image is worth a thousand words, therefore:
+
+![Without Guns extension in action](https://raw.githubusercontent.com/ironcev/without-guns-for-vs-code/master/images/demo.gif)
 
 ## FAQ
 ### Q: Why is the extension called "Without Guns"? Do you like guns?
