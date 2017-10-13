@@ -1,9 +1,9 @@
 # Without Guns for Visual Studio Code
 A [Visual Studio Code](https://code.visualstudio.com) extension that teaches you mindful programming.
 
-[![AppVeyor](https://img.shields.io/appveyor/ci/ironcev/without-guns-for-vs-code.svg)]()
-[![GitHub release](https://img.shields.io/github/release/ironcev/without-guns-for-vs-code/all.svg)]()
-[![license](https://img.shields.io/github/license/ironcev/without-guns-for-vs-code.svg)]()
+[![AppVeyor](https://img.shields.io/appveyor/ci/ironcev/without-guns-for-vs-code.svg)](https://ci.appveyor.com/project/ironcev/without-guns-for-vs-code)
+[![GitHub release](https://img.shields.io/github/release/ironcev/without-guns-for-vs-code/all.svg)](https://github.com/ironcev/without-guns-for-vs-code/releases)
+[![License](https://img.shields.io/github/license/ironcev/without-guns-for-vs-code.svg)](https://github.com/ironcev/without-guns-for-vs-code/blob/master/LICENSE)
 
 ## About
 *Without Guns* allows you to quickly turn ON and OFF the following Visual Studio Code features:
