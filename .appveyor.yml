@@ -1,0 +1,17 @@
+environment:
+    node_js: 7.9.0    # For VS Code >= 1.16.0
+matrix:
+  fast_finish: true
+platform:
+  - x64
+install:
+  - ps: Install-Product node $env:node_js $env:platform
+  - node --version
+  - npm --version
+  - ps: $PSVersionTable.PSVersion
+  - yarn install
+cache:
+  - '%LOCALAPPDATA%\Yarn'
+test_script:
+  - npm run "vscode:prepublish"
+build: off
