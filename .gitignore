@@ -2,3 +2,4 @@ out
 node_modules
 src/.vscode/settings.json
 test/smoke/.vscode
+test/demo/.vscode
