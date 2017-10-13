@@ -74,17 +74,14 @@ No. I'm dead serious about programming without guns.
 ## Release Notes
 All notable changes to the *Without Guns* extension are documented in the [changelog](CHANGELOG.md). Below is the excerpt from the changelog that lists only the major changes.
 
-### [0.3.0] - 2017-10-13
-#### Added
+### 0.3.0
 - "Guns: With" and "Guns: Without" commands are context sensitive. (They are active only if the Guns are currently taken or not, respectively.)
 
-### [0.2.0] - 2017-09-29
-#### Added
+### 0.2.0
 - Turns Syntax Highlighting on and off.
 - Turns Code Lens on and off.
 
-### [0.1.0] - 2017-09-28
-#### Added
+### 0.1.0
 - Turns IntelliSense on and off.
 
 ## License
