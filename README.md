@@ -76,3 +76,6 @@ All notable changes to the *Without Guns* extension are documented in the [chang
 ### [0.1.0] - 2017-09-28
 #### Added
 - Turns IntelliSense on and off.
+
+## License
+*Without Guns* is licensed under the [MIT license](LICENSE).
