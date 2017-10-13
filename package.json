@@ -1,24 +1,46 @@
 {
   "name": "without-guns",
   "displayName": "Without Guns",
-  "description": "Takes your guns from you and teaches you hand-to-hand combat",
-  "version": "0.1.0",
+  "description": "Takes your guns from you and teaches you peaceful and mindful programming",
+  "version": "0.3.0",
   "publisher": "ironcev",
-  "icon": "images/logo.png",
-  "engines": {
-    "vscode": "^1.16.0"
+  "license": "MIT",
+  "author": {
+    "email": "ironcev@hotmail.com",
+    "name": "Igor Rončević",
+    "url": "http://thehumbleprogrammer.com"
   },
+  "contributors": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/ironcev/without-guns-for-vs-code"
   },
+  "bugs": {
+    "url": "https://github.com/ironcev/without-guns-for-vs-code/issues",
+    "email": "ironcev@hotmail.com"
+  },
+  "engines": {
+    "vscode": "^1.16.0"
+  },
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "productivity",
+    "code-lens",
+    "syntax-highlighting",
+    "intellisense"
+  ],
+  "preview": false,
+  "homepage": "https://github.com/ironcev/without-guns-for-vs-code",
+  "icon": "images/logo.png",
+  "galleryBanner": {
+    "color": "#ffdd00"
+  },  
   "activationEvents": [
     "onCommand:withoutGuns.takeTheGuns",
     "onCommand:withoutGuns.giveTheGunsBack"
-  ],
+  ],  
   "main": "./out/src/extension",
   "contributes": {
     "commands": [
@@ -33,6 +55,17 @@
         "category": "Guns"
       }
     ],
+    "configuration": {
+      "type": "object",
+      "title": "Without Guns Internal Configuration",
+      "properties": {
+          "_withoutGuns.internal.areGunsTaken": {
+              "type": "boolean",
+              "default": false,
+              "description": "This internal setting is automatically set to true if the Guns are currently taken. It is not meant to be modified manually."
+          }
+      }
+    },
     "menus": {
         "commandPalette": [
           {
@@ -44,18 +77,7 @@
             "when": "config._withoutGuns.internal.areGunsTaken"
           }
         ]
-    },
-    "configuration": {
-      "type": "object",
-      "title": "Without Guns Internal Configuration",
-      "properties": {
-          "_withoutGuns.internal.areGunsTaken": {
-              "type": "boolean",
-              "default": false,
-              "description": "Internal configuration. >>> DO NOT MODIFY THIS CONFIGURATION MANUALLY! <<< This internal setting is set to true if the Guns are currently taken. It is not meant to be modified manually."
-          }
-      }
-  }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
