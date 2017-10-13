@@ -1,67 +1,78 @@
 # Without Guns for Visual Studio Code
+A [Visual Studio Code](https://code.visualstudio.com) extension that teaches you mindful programming.
 
-[The Readme.MD is yet to come. The below text is the standard template created by the Yeoman extension generator.]
+*Without Guns* allows you to quickly turn ON and OFF the following widely used Visual Studio Code features:
+- IntelliSense
+- Syntax Highlighting
+- Code Lens
 
-This is the README for your extension "without-guns". After writing up a brief description, we recommend including the following sections.
+When these features are turned OFF, we say that we code "without guns".
 
-## Features
+Occasional coding without guns forces you to code mindfully and yields the following benefits:
+- Increased coding confidence
+- Deeper knowledge of programming language syntax and features
+- Deeper knowledge of used frameworks and libraries
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+I suggest coding without guns whenever you learn something new, being that a new programming language, algorithm, framework or a technology.
 
-For example if there is an image subfolder under your extension project workspace:
+## FAQ
+### Q: Why is the extension called "Without Guns"? Do you like guns?
+No, I don't like guns. On the contrary, I dream of a world without them. The origin of the name is a story of its own :-) It has something to do with a quote from the 1996 film [Last Man Standing](https://en.wikipedia.org/wiki/Last_Man_Standing_(1996_film)) starring [Karina Lombard](https://en.wikipedia.org/wiki/Karina_Lombard), [Bruce Willis](https://en.wikipedia.org/wiki/Bruce_Willis), and [Christopher Walken](https://en.wikipedia.org/wiki/Christopher_Walken). I plan to write a blog post about it. The blog post will also explain the whole philosophy behind the programming without guns.
 
-\!\[feature X\]\(images/feature-x.png\)
+### Q: Are you suggesting that we should always code without IntelliSense, Syntax Highlighting, etc.?
+No. On the contrary. I am myself a huge fan and a strong proponent of productivity features and tools. What I am suggesting is to turn them off *occasionally*, especially when learning a new programming language or a new framework.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### Q: Does this really work? Will programming without guns really bring me confidence and deeper knowledge?
+Out of my years-long experience in practicing this technique - yes, definitely. Productivity features and tools like IntelliSense help you being fast and productive in the "production environment". Writing code without guns helps you learn programming languages, frameworks, and libraries in a much firmer way. Leaving guns behind intentionally while learning leads to a much deeper coding experience. This at the end brings deeper knowledge and a greater coding confidence.
 
-## Requirements
+### Q: Shouldn't we better spend time learning how to more efficiently use programming tools instead of learning how to code without them?
+We should do both, master our programming tools and master working without them. Coding without guns can be seen as [practicing Tai Chi movements in a slow and mindful manner](https://youtu.be/2GX4WZSUVPo). It builds strong inner foundations. Programming with guns is [using Tai Chi in a fight](https://youtu.be/Jw5mn15xv5o).
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### Q: Is *Without Guns* written without guns?
+Yes, a good portion of it. This is my first project ever written in [TypeScript](http://www.typescriptlang.org). Programming it without guns was a great way to deeply experience TypeScript's syntax and surrounding libraries.
+
+### Q: Is this all a joke?
+No. I'm dead serious about programming without guns.
+
+## Known Limitations
+*Without Guns* unobtrusively changes some [Visual Studio Code workspace settings](https://code.visualstudio.com/docs/getstarted/settings) on the fly. These results in two intrinsic limitations:
+- The extension cannot be used if there is no active workspace. In other words, you have to have a folder opened in Visual Studio Code in order for the extension to work.
+- You have to "get the guns back" before closing Visual Studio Code. Otherwise, if you close VS code while the guns are OFF, you will not be able to turn them automatically ON any more. If that happens, do not despair :-) To get the guns back simply do the following:
+    - Open the VS Code settings (*File* > *Preferences* > *Settings*).
+    - Inside the `settings.json` file you will see the following settings:
+
+            "editor.quickSuggestions": {
+                "other": false,
+                "comments": false,
+                "strings": false
+            },
+            "editor.wordBasedSuggestions": false,
+            "editor.parameterHints": false,
+            "editor.suggestOnTriggerCharacters": false,
+            "editor.codeLens": false,
+            "editor.tokenColorCustomizations": {
+                // Some token color settings, potentially a lot of them...
+            },
+            "_withoutGuns.internal.areGunsTaken": true
+
+    - Just delete those settings and save the `settings.json` file.
+    - That's it. This will bring your guns back to you :-)
 
 ## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+*Without Guns* extension comes with only one setting, `_withoutGuns.internal.areGunsTaken`. As the name suggests, this is a setting used internally by the extension itself. It should not be changed manually. In other words, just ignore it.
 
 ## Release Notes
+All notable changes to the *Without Guns* extension are documented in the [changelog](CHANGELOG.md). Below is the excerpt from the changelog that lists only the major changes.
 
-Users appreciate release notes as you update your extension.
+### [0.3.0] - 2017-10-13
+#### Added
+- "Guns: With" and "Guns: Without" commands are context sensitive. (They are active only if the Guns are currently taken or not, respectively.)
 
-### 1.0.0
+### [0.2.0] - 2017-09-29
+#### Added
+- Turns Syntax Highlighting on and off.
+- Turns Code Lens on and off.
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+### [0.1.0] - 2017-09-28
+#### Added
+- Turns IntelliSense on and off.
