@@ -1,7 +1,7 @@
 {
   "name": "without-guns",
   "displayName": "Without Guns",
-  "description": "Takes your guns from you and teaches you peaceful and mindful programming",
+  "description": "Takes your guns from you and teaches you mindful programming",
   "version": "0.3.0",
   "publisher": "ironcev",
   "license": "MIT",
@@ -29,7 +29,8 @@
     "productivity",
     "code-lens",
     "syntax-highlighting",
-    "intellisense"
+    "intellisense",
+    "mindful-programming"
   ],
   "preview": false,
   "homepage": "https://github.com/ironcev/without-guns-for-vs-code",
