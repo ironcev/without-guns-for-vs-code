@@ -75,6 +75,9 @@ No. I'm dead serious about programming without guns.
 ## Release Notes
 All notable changes to the *Without Guns* extension are documented in the [changelog](CHANGELOG.md). Below is the excerpt from the changelog that lists only the major changes.
 
+### 0.3.1
+- Adds the Visual Studio Marketplace badge.
+
 ### 0.3.0
 - "Guns: With" and "Guns: Without" commands are context sensitive. (They are active only if the Guns are currently taken or not, respectively.)
 
