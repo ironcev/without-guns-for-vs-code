@@ -63,7 +63,7 @@
           "_withoutGuns.internal.areGunsTaken": {
               "type": "boolean",
               "default": false,
-              "description": "This internal setting is automatically set to true if the Guns are currently taken. It is not meant to be modified manually."
+              "description": "This internal setting is automatically set to true if the guns are currently taken. It is not meant to be modified manually."
           }
       }
     },
