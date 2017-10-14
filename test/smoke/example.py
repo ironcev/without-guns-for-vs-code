@@ -1,4 +1,5 @@
-# the example is copied from https://github.com/selectnull/sandpiles/blob/2a5e0b922ef0d8c1884971d7ab9cb08890b56b9c/sandpiles.py
+# The example is compiled out of the following open source files:
+# - sandpiles/sandpiles.py (https://github.com/selectnull/sandpiles/blob/2a5e0b922ef0d8c1884971d7ab9cb08890b56b9c/sandpiles.py)
 
 import copy
 
