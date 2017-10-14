@@ -1,6 +1,7 @@
 # Without Guns for Visual Studio Code
 A [Visual Studio Code](https://code.visualstudio.com) extension that teaches you mindful programming.
 
+[![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/v/ironcev.without-guns.svg)](https://marketplace.visualstudio.com/items?itemName=ironcev.without-guns)
 [![AppVeyor](https://img.shields.io/appveyor/ci/ironcev/without-guns-for-vs-code.svg)](https://ci.appveyor.com/project/ironcev/without-guns-for-vs-code)
 [![GitHub release](https://img.shields.io/github/release/ironcev/without-guns-for-vs-code/all.svg)](https://github.com/ironcev/without-guns-for-vs-code/releases)
 [![License](https://img.shields.io/github/license/ironcev/without-guns-for-vs-code.svg)](https://github.com/ironcev/without-guns-for-vs-code/blob/master/LICENSE)
