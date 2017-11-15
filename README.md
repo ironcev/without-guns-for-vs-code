@@ -21,6 +21,8 @@ Occasional coding without guns forces you to code mindfully and yields the follo
 
 I suggest coding without guns whenever you learn something new, being that a new programming language, algorithm, framework or a technology.
 
+You can [download *Without Guns* from the Visual Studio Code marketplace](https://marketplace.visualstudio.com/items?itemName=ironcev.without-guns).
+
 ## Usage
 To start coding without guns simply call the `Guns: Without` command from the Command Palette. To get the guns back, call the `Guns: With` command. An image is worth a thousand words, therefore:
 
