@@ -31,7 +31,7 @@ class Coding {
 }
 
 function demo() {
-    var coding = new Coding();
+    let coding = new Coding();
 
     // Coding with guns. The usual way.
     coding.With().Guns().Is().Straightforward();

@@ -9,10 +9,10 @@ export function activate(context: vscode.ExtensionContext) {
         new gcons.SyntaxHighlightingGunController(vscode.workspace)
     ]
 
-    const host = (new class {
-        isFolderOpen = () => vscode.workspace.workspaceFolders != undefined;
-        showInformationMessage = (message : string) => vscode.window.showInformationMessage(message);
-    });
+    const host = {
+        isFolderOpen: () => vscode.workspace.workspaceFolders != undefined,
+        showInformationMessage: (message : string) => vscode.window.showInformationMessage(message)
+    };
 
     let withoutGunsExtension = new WithoutGunsExtension(gunControllers, vscode.workspace, host);
 
