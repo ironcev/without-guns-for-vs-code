@@ -39,7 +39,7 @@ export default abstract class ConfigurationDependentGunController extends GunCon
 
     protected storeInitialSettings(configuration: WorkspaceConfiguration) {
         this.initialSettings = {};
-        for (var property in this.gunlessSettings) {
+        for (let property in this.gunlessSettings) {
             this.initialSettings[property] = this.getWorkspaceValueForSetting(property, configuration);
         }
     }
@@ -51,13 +51,13 @@ export default abstract class ConfigurationDependentGunController extends GunCon
     }
 
     protected applyGunlessSettings(configuration: WorkspaceConfiguration) {
-        for (var property in this.gunlessSettings) {
+        for (let property in this.gunlessSettings) {
             configuration.update(property, this.gunlessSettings[property]);
         }
     }
 
     protected restoreInitialSettings(configuration: WorkspaceConfiguration) {
-        for (var property in this.gunlessSettings) {
+        for (let property in this.gunlessSettings) {
             configuration.update(property, this.initialSettings[property]);
         }
         this.initialSettings = undefined;
